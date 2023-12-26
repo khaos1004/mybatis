@@ -1,4 +1,4 @@
-package org.project.mybatis.model;
+package org.project.tmp.mybatis.model;
 
 import java.time.LocalDateTime;
 

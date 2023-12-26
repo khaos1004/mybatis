@@ -2,12 +2,11 @@ package org.project.service;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.project.mapper.TodoMapper;
-import org.project.vo.Todo;
+import org.project.tmp.TodoMapper;
+import org.project.tmp.service.TodoService;
+import org.project.tmp.vo.Todo;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class TodoServiceTest {
 

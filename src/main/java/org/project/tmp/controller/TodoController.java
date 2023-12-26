@@ -1,14 +1,12 @@
-package org.project.controller;
+package org.project.tmp.controller;
 
 import jakarta.servlet.http.HttpServletResponse;
-import org.project.mapper.TodoMapper;
-import org.project.service.TodoService;
-import org.project.vo.Todo;
+import org.project.tmp.TodoMapper;
+import org.project.tmp.service.TodoService;
+import org.project.tmp.vo.Todo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.transform.Result;
-import java.sql.ResultSet;
 import java.util.List;
 
 @RestController

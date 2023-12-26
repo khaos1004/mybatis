@@ -1,4 +1,4 @@
-package org.project.vo;
+package org.project.tmp.vo;
 
 import lombok.*;
 
