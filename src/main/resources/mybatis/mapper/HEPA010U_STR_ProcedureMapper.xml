@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.project.common.login.mapper.Hcom100Mapper">
+    <!-- 로그인 -->
+    <select id="login" resultType="java.lang.String">
+        SELECT USERID
+        FROM HCOM100_TBL
+        WHERE
+        (<if test="cmpycd != null">
+        CMPYCD = #{cmpycd, jdbcType=VARCHAR}
+        AND USERID = #{userid, jdbcType=VARCHAR}
+        AND PW = #{pw, jdbcType=VARCHAR}
+    </if>
+        <if test="cmpycd == null">
+            USERID = #{userid, jdbcType=VARCHAR}
+            AND PW = #{pw, jdbcType=VARCHAR}
+        </if>)
+    </select>
+
+    <!-- 프로시저 호출   -->
+    <select id="HCOM100_STR" statementType="CALLABLE" resultType="java.util.Map">
+        {call HCOM100_STR(
+        #{iACTKIND, mode=IN, jdbcType=CHAR},
+        #{iCMPYCD, mode=IN, jdbcType=CHAR},
+        #{iNACD, mode=IN, jdbcType=CHAR},
+        #{iUSERID, mode=IN, jdbcType=VARCHAR},
+        #{iUSERNM, mode=IN, jdbcType=VARCHAR},
+        #{iDEPTCD, mode=IN, jdbcType=CHAR},
+        #{iDEPTNM, mode=IN, jdbcType=VARCHAR},
+        #{iEMPNO, mode=IN, jdbcType=VARCHAR},
+        #{iSALSYN, mode=IN, jdbcType=CHAR},
+        #{iPW, mode=IN, jdbcType=VARCHAR},
+        #{iTELNO, mode=IN, jdbcType=VARCHAR},
+        #{iHPNO, mode=IN, jdbcType=VARCHAR},
+        #{iEMAIL, mode=IN, jdbcType=VARCHAR},
+        #{iSDEPT, mode=IN, jdbcType=CHAR},
+        #{iUSEYN, mode=IN, jdbcType=CHAR},
+        #{iUSERGRP, mode=IN, jdbcType=CHAR},
+        #{iPOSITION, mode=IN, jdbcType=CHAR},
+        #{iUPDEMP, mode=IN, jdbcType=VARCHAR}
+        )}
+    </select>
+
+    <!-- 위의 프로시저를 쿼리별로 분할하여 호출 -->
+    <select id="selectRtn" statementType="CALLABLE" resultType="java.util.Map">
+        {call HCOM100_STR(
+        'S0',
+        #{iCMPYCD, mode=IN, jdbcType=CHAR},
+        #{iNACD, mode=IN, jdbcType=CHAR},
+        #{iUSERID, mode=IN, jdbcType=VARCHAR}
+        )}
+    </select>
+
+    <select id="selectListRtn" statementType="CALLABLE" resultType="java.util.Map">
+        {call HCOM100_STR(
+        'S1',
+        #{iCMPYCD, mode=IN, jdbcType=CHAR},
+        #{iNACD, mode=IN, jdbcType=CHAR},
+        #{iUSERNM, mode=IN, jdbcType=VARCHAR}
+        )}
+    </select>
+
+    <insert id="insertRtn" statementType="CALLABLE">
+        {call HCOM100_STR(
+        'A0',
+        #{iCMPYCD, mode=IN, jdbcType=CHAR},
+        #{iNACD, mode=IN, jdbcType=CHAR},
+        )}
+    </insert>
+
+    <update id="updateRtn" statementType="CALLABLE">
+        {call HCOM100_STR(
+        'U0',
+        #{iCMPYCD, mode=IN, jdbcType=CHAR},
+        #{iNACD, mode=IN, jdbcType=CHAR},
+        )}
+    </update>
+
+    <delete id="deleteRtn" statementType="CALLABLE">
+        {call HCOM100_STR(
+        'D0',
+        #{iCMPYCD, mode=IN, jdbcType=CHAR},
+        #{iNACD, mode=IN, jdbcType=CHAR},
+        #{iUSERID, mode=IN, jdbcType=VARCHAR}
+        )}
+    </delete>
+</mapper>
