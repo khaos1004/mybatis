@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api")
 public class Hcom100Controller {
     private final Hcom100Service hcom100Service;
 
@@ -27,6 +29,6 @@ public class Hcom100Controller {
                 loginRequestDTO.getUSERID(),
                 loginRequestDTO.getPW()
         );
-        return userId.map(s -> ResponseEntity.ok("Login successful: User ID is " + s)).orElseGet(() -> ResponseEntity.status(401).body("Login failed"));
+        return userId.map(data -> ResponseEntity.ok("Login successful: User ID is " + data)).orElseGet(() -> ResponseEntity.status(401).body("Login failed"));
     }
 }

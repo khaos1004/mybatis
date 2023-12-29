@@ -4,15 +4,6 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.project.common.login.mapper.Hcom100Mapper">
-<!--    <insert id="save">-->
-<!--        insert into TODO(CONTENT, ISCOMPLETED)-->
-<!--        values (#{todo.content}, #{todo.isCompleted});-->
-<!--    </insert>-->
-
-<!--    <select id="sel" resultType="org.project.tmp.vo.Todo">-->
-<!--        SELECT * FROM TODO-->
-<!--    </select>-->
-
     <!-- 로그인 -->
     <select id="login" resultType="java.lang.String">
         SELECT USERID
