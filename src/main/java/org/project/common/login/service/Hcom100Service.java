@@ -19,7 +19,7 @@ public class Hcom100Service {
         this.hcom100Mapper = hcom100Mapper;
     }
 
-    public Optional<String> login(String cmpycd, String userid, String pw) {
+    public Optional<LoginResponseDTO> login(String cmpycd, String userid, String pw) {
         return hcom100Mapper.login(cmpycd, userid, pw);
     }
 }

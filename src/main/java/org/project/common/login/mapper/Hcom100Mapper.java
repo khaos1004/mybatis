@@ -15,7 +15,7 @@ public interface Hcom100Mapper {
     /**
      * 로그인
      */
-    Optional<String> login(String cmpycd, String userid, String pw);
+    Optional<LoginResponseDTO> login(String cmpycd, String userid, String pw);
 
     /**
      *CRUD 통합 프로시저 메서드

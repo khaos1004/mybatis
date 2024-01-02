@@ -5,8 +5,8 @@
 
 <mapper namespace="org.project.common.login.mapper.Hcom100Mapper">
     <!-- 로그인 -->
-    <select id="login" resultType="java.lang.String">
-        SELECT USERID
+    <select id="login" resultType="org.project.common.login.dto.LoginResponseDTO">
+        SELECT USERID, USERNM
         FROM HCOM100_TBL
         WHERE
         (<if test="cmpycd != null">
