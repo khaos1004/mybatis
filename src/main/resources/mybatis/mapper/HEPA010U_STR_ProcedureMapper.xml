@@ -3,88 +3,73 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.project.mapper.HEPA010U_STR">
-    <!-- 로그인 -->
-    <select id="login" resultType="java.lang.String">
-        SELECT USERID
-        FROM HCOM100_TBL
-        WHERE
-        (<if test="cmpycd != null">
-        CMPYCD = #{cmpycd, jdbcType=VARCHAR}
-        AND USERID = #{userid, jdbcType=VARCHAR}
-        AND PW = #{pw, jdbcType=VARCHAR}
-    </if>
-        <if test="cmpycd == null">
-            USERID = #{userid, jdbcType=VARCHAR}
-            AND PW = #{pw, jdbcType=VARCHAR}
-        </if>)
-    </select>
-
-    <!-- 프로시저 호출   -->
-    <select id="HCOM100_STR" statementType="CALLABLE" resultType="java.util.Map">
-        {call HCOM100_STR(
-        #{iACTKIND, mode=IN, jdbcType=CHAR},
-        #{iCMPYCD, mode=IN, jdbcType=CHAR},
-        #{iNACD, mode=IN, jdbcType=CHAR},
-        #{iUSERID, mode=IN, jdbcType=VARCHAR},
-        #{iUSERNM, mode=IN, jdbcType=VARCHAR},
-        #{iDEPTCD, mode=IN, jdbcType=CHAR},
-        #{iDEPTNM, mode=IN, jdbcType=VARCHAR},
-        #{iEMPNO, mode=IN, jdbcType=VARCHAR},
-        #{iSALSYN, mode=IN, jdbcType=CHAR},
-        #{iPW, mode=IN, jdbcType=VARCHAR},
-        #{iTELNO, mode=IN, jdbcType=VARCHAR},
-        #{iHPNO, mode=IN, jdbcType=VARCHAR},
-        #{iEMAIL, mode=IN, jdbcType=VARCHAR},
-        #{iSDEPT, mode=IN, jdbcType=CHAR},
-        #{iUSEYN, mode=IN, jdbcType=CHAR},
-        #{iUSERGRP, mode=IN, jdbcType=CHAR},
-        #{iPOSITION, mode=IN, jdbcType=CHAR},
-        #{iUPDEMP, mode=IN, jdbcType=VARCHAR}
-        )}
-    </select>
-
-    <!-- 위의 프로시저를 쿼리별로 분할하여 호출 -->
-    <select id="selectRtn" statementType="CALLABLE" resultType="java.util.Map">
-        {call HCOM100_STR(
-        'S0',
-        #{iCMPYCD, mode=IN, jdbcType=CHAR},
-        #{iNACD, mode=IN, jdbcType=CHAR},
-        #{iUSERID, mode=IN, jdbcType=VARCHAR}
-        )}
-    </select>
-
-    <select id="selectListRtn" statementType="CALLABLE" resultType="java.util.Map">
-        {call HCOM100_STR(
-        'S1',
-        #{iCMPYCD, mode=IN, jdbcType=CHAR},
-        #{iNACD, mode=IN, jdbcType=CHAR},
-        #{iUSERNM, mode=IN, jdbcType=VARCHAR}
-        )}
-    </select>
-
-    <insert id="insertRtn" statementType="CALLABLE">
-        {call HCOM100_STR(
+<mapper namespace="org.project.mapper.hepa.HEPA010U_STR">
+    <insert id="ADD_PROC_A0" statementType="CALLABLE">
+        {call HEPA010U_STR(
         'A0',
         #{iCMPYCD, mode=IN, jdbcType=CHAR},
-        #{iNACD, mode=IN, jdbcType=CHAR},
+        #{iREQYMD, mode=IN, jdbcType=CHAR},
+        #{iDEPTCD, mode=IN, jdbcType=CHAR},
+        #{iINYMD, mode=IN, jdbcType=CHAR},
+        #{iREMARK, mode=IN, jdbcType=VARCHAR},
+        #{iREQGB, mode=IN, jdbcType=CHAR},
+        #{iREQ_USERID, mode=IN, jdbcType=VARCHAR},
+        #{iUPDEMP, mode=IN, jdbcType=VARCHAR}
         )}
     </insert>
 
-    <update id="updateRtn" statementType="CALLABLE">
-        {call HCOM100_STR(
+    <update id="UPD_PROC_U0" statementType="CALLABLE">
+        {call HEPA010U_STR(
         'U0',
         #{iCMPYCD, mode=IN, jdbcType=CHAR},
-        #{iNACD, mode=IN, jdbcType=CHAR},
+        #{iREQYM, mode=IN, jdbcType=CHAR},
+        #{iREQNO, mode=IN, jdbcType=CHAR},
+        #{iINYMD, mode=IN, jdbcType=CHAR},
+        #{iREQYMD, mode=IN, jdbcType=CHAR},
+        #{iDEPTCD, mode=IN, jdbcType=CHAR},
+        #{iREQ_USERID, mode=IN, jdbcType=VARCHAR},
+        #{iREMARK, mode=IN, jdbcType=VARCHAR},
+        #{iUPDEMP, mode=IN, jdbcType=VARCHAR}
         )}
     </update>
 
-    <delete id="deleteRtn" statementType="CALLABLE">
-        {call HCOM100_STR(
+    <delete id="DEL_PROC_D0" statementType="CALLABLE">
+        {call HEPA010U_STR(
         'D0',
         #{iCMPYCD, mode=IN, jdbcType=CHAR},
-        #{iNACD, mode=IN, jdbcType=CHAR},
-        #{iUSERID, mode=IN, jdbcType=VARCHAR}
+        #{iREQYM, mode=IN, jdbcType=CHAR},
+        #{iREQNO, mode=IN, jdbcType=CHAR},
+        #{iUPDEMP, mode=IN, jdbcType=VARCHAR}
         )}
     </delete>
+
+    <select id="SEL_PROC_S0" statementType="CALLABLE" resultType="map">
+        {call HEPA010U_STR(
+        'S0',
+        #{iCMPYCD, mode=IN, jdbcType=CHAR},
+        #{iREQYM, mode=IN, jdbcType=CHAR},
+        #{iREQNO, mode=IN, jdbcType=CHAR},
+        #{iREQGB, mode=IN, jdbcType=CHAR}
+        )}
+    </select>
+
+    <select id="PREV_PROC_P0" statementType="CALLABLE" resultType="map">
+        {call HEPA010U_STR(
+        'P0',
+        #{iCMPYCD, mode=IN, jdbcType=CHAR},
+        #{iREQYM, mode=IN, jdbcType=CHAR},
+        #{iREQNO, mode=IN, jdbcType=CHAR},
+        #{iREQGB, mode=IN, jdbcType=CHAR}
+        )}
+    </select>
+
+    <select id="NEXT_PROC_N0" statementType="CALLABLE" resultType="map">
+        {call HEPA010U_STR(
+        'N0',
+        #{iCMPYCD, mode=IN, jdbcType=CHAR},
+        #{iREQYM, mode=IN, jdbcType=CHAR},
+        #{iREQNO, mode=IN, jdbcType=CHAR},
+        #{iREQGB, mode=IN, jdbcType=CHAR}
+        )}
+    </select>
 </mapper>

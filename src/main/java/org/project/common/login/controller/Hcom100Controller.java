@@ -2,6 +2,7 @@ package org.project.common.login.controller;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpServletRequest;
+import org.project.common.login.dto.DepartmentNmResponseDTO;
 import org.project.common.login.dto.LoginRequestDTO;
 import org.project.common.login.dto.LoginResponseDTO;
 import org.project.common.login.service.Hcom100Service;
@@ -36,6 +37,14 @@ public class Hcom100Controller {
         if (userInfo.isPresent()) {
             HttpSession session = request.getSession();
             session.setAttribute("loginMember", userInfo);
+
+            LoginResponseDTO user = userInfo.get();
+            Optional<DepartmentNmResponseDTO> departmentNmResponseDTO = hcom100Service.getDepartmentName(user.getDEPTCD());
+
+            if(departmentNmResponseDTO.isPresent()) {
+                DepartmentNmResponseDTO depart = departmentNmResponseDTO.get();
+                user.setDEPTNM(depart.getDEPTNM());
+            }
 
             return ResponseEntity.ok(userInfo);
         }
@@ -76,5 +85,15 @@ public class Hcom100Controller {
     public String logout(HttpSession session) {
         session.invalidate();
         return "logout!";
+    }
+
+    @PostMapping("/getDepartmentName")
+    @CrossOrigin(origins ="http://localhost:8081", allowCredentials = "true")
+    public ResponseEntity<Optional<DepartmentNmResponseDTO>> getDepartment(@RequestBody DepartmentNmResponseDTO departmentNmResponseDTO) {
+        Optional<DepartmentNmResponseDTO> department = hcom100Service.getDepartmentName(departmentNmResponseDTO.getDEPTCD());
+        if (department.isPresent()) {
+            return ResponseEntity.ok(department);
+        }
+        return ResponseEntity.status(401).body(null);
     }
 }

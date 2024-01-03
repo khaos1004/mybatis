@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
+import org.project.common.login.dto.DepartmentNmResponseDTO;
 import org.project.common.login.dto.LoginResponseDTO;
 
 import java.util.List;
@@ -12,6 +13,11 @@ import java.util.Optional;
 
 @Mapper
 public interface Hcom100Mapper {
+    /**
+     * 부서명 출력
+     */
+    Optional<DepartmentNmResponseDTO> getDepartmentName(String deptcd);
+
     /**
      * 로그인
      */

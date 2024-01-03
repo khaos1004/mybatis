@@ -1,4 +1,4 @@
-package org.project.mapper;
+package org.project.mapper.hepa;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -29,7 +29,6 @@ public interface HEPA010U_STR {
             @Param("iINYMD") String iINYMD,
             @Param("iREQYMD") String iREQYMD,
             @Param("iREMARK") String iREMARK,
-            @Param("iREQGB") String iREQGB,
             @Param("iREQ_USERID") String iREQ_USERID,
             @Param("iUPDEMP") String iUPDEMP
     );
@@ -37,7 +36,8 @@ public interface HEPA010U_STR {
     String DEL_PROC_D0(
             @Param("iCMPYCD") String iCMPYCD,
             @Param("iREQYM") String iREQYM,
-            @Param("iREQNO") String iREQNO
+            @Param("iREQNO") String iREQNO,
+            @Param("iUPDEMP") String iUPDEMP
     );
 
     List<Object> SEL_PROC_S0(

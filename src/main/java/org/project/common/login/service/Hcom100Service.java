@@ -1,5 +1,6 @@
 package org.project.common.login.service;
 
+import org.project.common.login.dto.DepartmentNmResponseDTO;
 import org.project.common.login.dto.LoginRequestDTO;
 import org.project.common.login.dto.LoginResponseDTO;
 import org.project.common.login.mapper.Hcom100Mapper;
@@ -21,5 +22,9 @@ public class Hcom100Service {
 
     public Optional<LoginResponseDTO> login(String cmpycd, String userid, String pw) {
         return hcom100Mapper.login(cmpycd, userid, pw);
+    }
+
+    public Optional<DepartmentNmResponseDTO> getDepartmentName(String deptcd){
+        return hcom100Mapper.getDepartmentName(deptcd);
     }
 }
