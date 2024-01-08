@@ -14,4 +14,6 @@ public class LoginResponseDTO {
     private String USERNM;
     private String DEPTCD;
     private String DEPTNM;
+    private String CMPYCD;
+    private String NACD;
 }
