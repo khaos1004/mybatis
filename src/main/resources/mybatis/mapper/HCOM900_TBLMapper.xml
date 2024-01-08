@@ -6,15 +6,16 @@
 <mapper namespace="org.project.common.menu.mapper.Hcom900Mapper">
     <!-- 상단 메뉴 -->
     <select id="headerMenu" resultType="org.project.common.menu.dto.HeaderMenuResponseDTO">
-        SELECT CODENM
+        SELECT CODECD, CODENM
         FROM HCOM900_TBL
-        WHERE
-        CDTYPE = '010'
-        AND USEYN = 'Y'
+        WHERE CMPYCD = 'HAIONNET'
+          AND NACD = 'KOR'
+          AND CDTYPE = '010'
+          AND USEYN = 'Y'
     </select>
 
     <select id="sideMenu" resultType="org.project.common.menu.dto.SideMenuResponseDTO">
-        SELECT A.GRPCD, B.GRPNM, A.PGMNM
+        SELECT A.GRPCD, B.GRPNM, A.PGMID, A.PGMNM
         FROM HCOM110_TBL A LEFT OUTER JOIN HCOM300_TBL B
         ON A.CMPYCD = B.CMPYCD AND A.NACD = B.NACD AND A.UPMUCD = B.UPMUCD
         AND A.GRPCD = B.GRPCD AND A.USEYN = 'Y'

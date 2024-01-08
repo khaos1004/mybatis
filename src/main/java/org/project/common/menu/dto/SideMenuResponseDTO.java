@@ -11,5 +11,6 @@ import lombok.Setter;
 public class SideMenuResponseDTO {
     private String GRPCD;
     private String GRPNM;
+    private String PGMID;
     private String PGMNM;
 }

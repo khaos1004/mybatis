@@ -10,5 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 @AllArgsConstructor
 @NoArgsConstructor
 public class HeaderMenuResponseDTO {
+    private String CodeCd;
     private String CodeNm;
 }
